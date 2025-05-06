@@ -15,13 +15,39 @@ class AccidentAnalyzerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Accident Analyzer',
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
+
+  Future<void> _selectDate(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
+    DateTime? _picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+    );
+
+    if (_picked != null) {
+      setState(() {
+        controller.text = _picked.toString().split(" ")[0];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,34 +95,54 @@ class HomePage extends StatelessWidget {
                         children: [
                           Flexible(
                             child: TextField(
+                              controller: _startDateController,
                               decoration: InputDecoration(
                                 labelText: "Start",
-                                labelStyle: const TextStyle(color: Colors.white),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 filled: true,
                                 fillColor: Color(0xFFD9D9D9).withOpacity(0.1),
-                                suffixIcon: const Icon(Icons.calendar_today, color: Colors.white),
+                                suffixIcon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.white,
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none,
                                 ),
                               ),
+                              readOnly: true,
+                              onTap: () {
+                                _selectDate(context, _startDateController);
+                              },
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
                           const SizedBox(width: 20),
                           Flexible(
                             child: TextField(
+                              controller: _endDateController,
                               decoration: InputDecoration(
                                 labelText: "End",
-                                labelStyle: const TextStyle(color: Colors.white),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 filled: true,
                                 fillColor: Color(0xFFD9D9D9).withOpacity(0.1),
-                                suffixIcon: const Icon(Icons.calendar_today, color: Colors.white),
+                                suffixIcon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.white,
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none,
                                 ),
                               ),
+                              readOnly: true,
+                              onTap: () {
+                                _selectDate(context, _endDateController);
+                              },
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -109,7 +155,10 @@ class HomePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
                         backgroundColor: Color(0xFF0077FF),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
