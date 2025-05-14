@@ -31,9 +31,15 @@
 
   <title>flutter_application_1</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    function initMapJS() {
+      window.mapReady = true;
+    }
+  </script>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0xenLIkUU0y4LbZahZd-NfZZBR8QiLUg"></script>
+  
+  <script src="flutter_bootstrap.js" async></script> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0xenLIkUU0y4LbZahZd-NfZZBR8QiLUg" async defer></script>
 </body>
 </html>

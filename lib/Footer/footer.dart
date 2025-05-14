@@ -1,7 +1,10 @@
 // lib/Footer/footer.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:footer/footer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Accident_Analyzer/main.dart';
+import '../Landing/homePage.dart';
 
 class CustomFooter extends StatelessWidget {
   const CustomFooter({super.key});
@@ -24,7 +27,14 @@ class CustomFooter extends StatelessWidget {
                   width: 70.0,
                   child: Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LandingPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Home',
                         style: TextStyle(color: Colors.white),
@@ -37,7 +47,14 @@ class CustomFooter extends StatelessWidget {
                   width: 80.0,
                   child: Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AccidentAnalyzerApp(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Analysis',
                         style: TextStyle(color: Colors.white),
@@ -63,7 +80,14 @@ class CustomFooter extends StatelessWidget {
                   width: 80.0,
                   child: Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AccidentDetectorApp(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Logout',
                         style: TextStyle(color: Colors.white),

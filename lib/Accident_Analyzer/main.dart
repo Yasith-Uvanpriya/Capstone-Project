@@ -33,18 +33,22 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _endDateController = TextEditingController();
 
   // Function to show the date picker
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+  Future<void> _selectDate(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(), // current date as default
-      firstDate: DateTime(2000),   // earliest date allowed
-      lastDate: DateTime(2100),    // latest date allowed
+      firstDate: DateTime(2000), // earliest date allowed
+      lastDate: DateTime(2100), // latest date allowed
     );
 
     // If a date is selected, set it to the controller
     if (pickedDate != null) {
       setState(() {
-        controller.text = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+        controller.text =
+            "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
       });
     }
   }
@@ -55,7 +59,6 @@ class _HomePageState extends State<HomePage> {
     _endDateController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 30),
 
-                     // Date Inputs (Start and End)
+                    // Date Inputs (Start and End)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -106,13 +109,24 @@ class _HomePageState extends State<HomePage> {
                             child: TextField(
                               controller: _startDateController,
                               readOnly: true, // Disable manual typing
-                              onTap: () => _selectDate(context, _startDateController), // Show calendar on tap
+                              onTap:
+                                  () => _selectDate(
+                                    context,
+                                    _startDateController,
+                                  ), // Show calendar on tap
                               decoration: InputDecoration(
                                 labelText: "Start",
-                                labelStyle: const TextStyle(color: Colors.white),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 filled: true,
-                                fillColor: const Color(0xFFD9D9D9).withOpacity(0.1),
-                                suffixIcon: const Icon(Icons.calendar_today, color: Colors.white),
+                                fillColor: const Color(
+                                  0xFFD9D9D9,
+                                ).withOpacity(0.1),
+                                suffixIcon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.white,
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none,
@@ -128,13 +142,24 @@ class _HomePageState extends State<HomePage> {
                             child: TextField(
                               controller: _endDateController,
                               readOnly: true, // Disable manual typing
-                              onTap: () => _selectDate(context, _endDateController), // Show calendar on tap
+                              onTap:
+                                  () => _selectDate(
+                                    context,
+                                    _endDateController,
+                                  ), // Show calendar on tap
                               decoration: InputDecoration(
                                 labelText: "End",
-                                labelStyle: const TextStyle(color: Colors.white),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 filled: true,
-                                fillColor: const Color(0xFFD9D9D9).withOpacity(0.1),
-                                suffixIcon: const Icon(Icons.calendar_today, color: Colors.white),
+                                fillColor: const Color(
+                                  0xFFD9D9D9,
+                                ).withOpacity(0.1),
+                                suffixIcon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.white,
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide.none,
@@ -152,7 +177,10 @@ class _HomePageState extends State<HomePage> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
                         backgroundColor: Color(0xFF0077FF),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -176,4 +204,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

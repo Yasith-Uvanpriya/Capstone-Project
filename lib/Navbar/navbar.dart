@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Accident_Analyzer/main.dart';
+import '../Landing/homePage.dart';
 
 void main() => runApp(TestNavBarApp());
 
@@ -41,10 +44,10 @@ class Navbar extends StatelessWidget {
           ),
           Row(
             children: [
-              _navItem("Home"),
-              _navItem("Analysis"),
-              _navItem("History"),
-              _navItem("Logout"),
+              _navItem(context, "Home", LandingPage()),
+              _navItem(context, "Analysis", AccidentAnalyzerApp()),
+              _navItem(context, "History", LandingPage()),
+              _navItem(context, "Logout", AccidentDetectorApp()),
             ],
           ),
         ],
@@ -52,11 +55,16 @@ class Navbar extends StatelessWidget {
     );
   }
 
-  Widget _navItem(String title) {
+  Widget _navItem(BuildContext context, String title, Widget page) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
         child: Text(
           title,
           style: GoogleFonts.lato(color: Colors.white, fontSize: 16),

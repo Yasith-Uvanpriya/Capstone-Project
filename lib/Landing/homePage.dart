@@ -7,7 +7,9 @@ import 'package:footer/footer_view.dart';
 import '../Footer/footer.dart';
 import '../google_map_view.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
