@@ -44,7 +44,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 <<<<<<< HEAD
+<<<<<<< HEAD
 node_modules
 =======
 node_modules3
 >>>>>>> web
+=======
+>>>>>>> mobile-app

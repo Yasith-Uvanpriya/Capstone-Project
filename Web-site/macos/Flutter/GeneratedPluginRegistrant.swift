@@ -6,6 +6,7 @@ import FlutterMacOS
 import Foundation
 
 
+<<<<<<< HEAD
 import cloud_firestore
 import firebase_auth
 import firebase_core
@@ -17,4 +18,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
 
+=======
+func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+>>>>>>> mobile-app
 }

@@ -1,10 +1,13 @@
 plugins {
     id("com.android.application")
+<<<<<<< HEAD
 
     // START: FlutterFire Configuration
     id("com.google.gms.google-services")
     // END: FlutterFire Configuration
 
+=======
+>>>>>>> mobile-app
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
@@ -42,7 +45,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> mobile-app
 }
 
 flutter {
