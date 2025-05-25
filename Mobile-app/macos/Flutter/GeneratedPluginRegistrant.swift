@@ -5,10 +5,6 @@
 import FlutterMacOS
 import Foundation
 
-<<<<<<< HEAD
-
-func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-=======
 import cloud_firestore
 import file_selector_macos
 import firebase_auth
@@ -25,5 +21,4 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseStoragePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseStoragePlugin"))
   GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
->>>>>>> mobile-app
 }
