@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:map_project/home.dart';
+import 'accident_reporting_page.dart';
 import 'signup_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../firebase_options.dart';
+import 'home_page.dart';
 
-void main() => runApp(LoginApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(LoginApp());
+}
 
 class LoginApp extends StatelessWidget {
   @override
@@ -14,7 +24,34 @@ class LoginApp extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // ✅ Navigate to HomePage on success
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => AcciaLertApp()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Login failed: ${e.toString()}")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +94,7 @@ class LoginPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _emailController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -90,6 +128,7 @@ class LoginPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _passwordController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -134,7 +173,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(41, 103, 209, 1),
                     minimumSize: const Size(double.infinity, 50),

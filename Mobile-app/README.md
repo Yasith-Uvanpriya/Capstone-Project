@@ -1,4 +1,4 @@
-# food_ordering_app
+# map_project
 
 A new Flutter project.
 

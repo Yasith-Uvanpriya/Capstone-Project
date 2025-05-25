@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'login_page.dart';
 
 void main() => runApp(SignUpApp());
 
@@ -9,7 +12,66 @@ class SignUpApp extends StatelessWidget {
   }
 }
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _idNumberController = TextEditingController();
+
+  void _signUp() async {
+    try {
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(credential.user!.uid)
+          .set({
+            'first_name': _firstNameController.text.trim(),
+            'last_name': _lastNameController.text.trim(),
+            'id_number': _idNumberController.text.trim(),
+            'email': _emailController.text.trim(),
+          });
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      // Only use e.message – this is a plain String
+      _showErrorDialog(e.message ?? 'Unknown Firebase Auth error.');
+    } catch (_) {
+      // Do NOT log or use the error object directly
+      _showErrorDialog('An unknown error occurred. Please try again.');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(message),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +106,7 @@ class SignUpPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _firstNameController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -77,6 +140,7 @@ class SignUpPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _lastNameController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -105,6 +169,7 @@ class SignUpPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _emailController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -138,6 +203,7 @@ class SignUpPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _passwordController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -170,6 +236,7 @@ class SignUpPage extends StatelessWidget {
                 width: 300,
                 height: 35,
                 child: TextField(
+                  controller: _idNumberController,
                   style: TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
@@ -191,7 +258,7 @@ class SignUpPage extends StatelessWidget {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(41, 103, 209, 1),
                     minimumSize: const Size(double.infinity, 50),
