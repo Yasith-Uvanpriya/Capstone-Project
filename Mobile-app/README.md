@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# flutter_application_1
-=======
 # map_project
->>>>>>> mobile-app
 
 A new Flutter project.
 
