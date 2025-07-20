@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firestore Markers on Map</title>
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .popup-content {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      height: 100%;
+    }
+    .popup-content h2 {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .popup-content label {
+      display: block;
+      margin: 5px 0;
+    }
+    .popup-content input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .popup-content button {
+      width: 48%;
+      padding: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .popup-content button.save {
+      background-color: blue;
+      color: white;
+    }
+    .popup-content button.emergency {
+      background-color: red;
+      color: white;
+    }
+  </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCmTcfOw6OkEHi6ZyPfAR1Bc2JJEC6OSw&callback=initMap" async defer></script>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCmTcfOw6OkEHi6ZyPfAR1Bc2JJEC6OSw",
+      authDomain: "projectcapstone-cd867.firebaseapp.com",
+      projectId: "projectcapstone-cd867",
+      storageBucket: "projectcapstone-cd867.appspot.com",
+      messagingSenderId: "951216708050",
+      appId: "1:951216708050:web:your_app_id_here"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function initMap() {
+      const mapCenter = { lat: 6.9271, lng: 79.8612 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: mapCenter,
+        zoom: 12,
+      });
+
+      // Fetch accident reports from Firestore
+      db.collection("accident_reports").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+
+          // Convert lat/lng from string to number if needed
+          const lat = parseFloat(data.latitude);
+          const lng = parseFloat(data.longitude);
+
+          if (isNaN(lat) || isNaN(lng)) {
+            console.warn(`Invalid coordinates for doc ID ${doc.id}`);
+            return; // skip invalid entries
+          }
+
+          const marker = new google.maps.Marker({
+            position: { lat, lng },
+            map: map,
+            title: data.location || "Accident Location",
+          });
+
+          const contentString = `
+              <div class="popup-content" id="popup-${doc.id}">
+                <h2>Accident Report</h2>
+                <label>Time:</label>
+                <input type="text" value="${data.timestamp || "N/A"}" readonly/>
+                <label>Location:</label>
+                <input type="text" value="${data.location || "N/A"}" readonly/>
+                <label>Description:</label>
+                <input type="text" id="desc-${doc.id}" value="${data.description || ""}"/>
+                <label>Vehicle Numbers:</label>
+                <input type="text" id="veh-${doc.id}" value="${data.vehicle_numbers || ""}"/>
+                <label>Reporter's Tel No:</label>
+                <input type="text" value="${data.reporter_tel || "N/A"}" readonly/>
+                <button class="save" onclick="saveData('${doc.id}')">Save</button>
+                <button class="emergency">Emergency</button>
+              </div>
+            `;
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: contentString,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+          });
+        });
+      }).catch((error) => {
+        console.error("Error getting documents: ", error);
+      });
+    }
+
+    window.initMap = initMap;
+    function saveData(docId) {
+    const descInput = document.getElementById(`desc-${docId}`);
+    const vehInput = document.getElementById(`veh-${docId}`);
+    const newDescription = descInput.value;
+    const newVehicleNumbers = vehInput.value;
+
+    firebase.firestore().collection("accident_reports").doc(docId).update({
+      description: newDescription,
+      vehicle_numbers: newVehicleNumbers
+    }).then(() => {
+      alert("Data updated successfully!");
+    }).catch((error) => {
+      console.error("Error updating document: ", error);
+      alert("Failed to update data.");
+    });
+  } // make initMap global
+  </script>
+</body>
+</html>
