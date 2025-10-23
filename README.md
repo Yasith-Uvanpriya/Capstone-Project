@@ -1,16 +1,13 @@
-Capstone Project - Accident Reporting & Analysis System
-https://img.shields.io/badge/Flutter-3.0+-02569B?logo=flutter
-https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black
-https://img.shields.io/badge/Python-3.x-3776AB?logo=python
-https://img.shields.io/badge/Platform-Android%2520%257C%2520iOS%2520%257C%2520Web-lightgrey
+**Capstone Project - Accident Reporting & Analysis System**
 
 A comprehensive accident reporting system with a mobile app for citizens and a website admin panel for authorities. The system uses Firebase for backend services and includes an AI module for accident analysis and prediction.
 
 📱 Mobile App & 🖥️ Website Preview
 Mobile App - First Page
-https://assets/mobile-app-first-page.png
 
-Website Admin Panel - First Page
+
+Website Admin Panel - First Page![home](https://github.com/user-attachments/assets/938c25b5-a37f-4c1c-a859-0b4fc613969e)
+
 https://assets/website-first-page.png
 
 📋 Table of Contents
