@@ -42,7 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
             'email': _emailController.text.trim(),
           });
 
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
       );

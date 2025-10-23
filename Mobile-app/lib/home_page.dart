@@ -3,21 +3,6 @@ import 'map_page.dart';
 import 'accident_reporting_page.dart';
 import 'call_police.dart'; // Import the map page
 
-void main() {
-  runApp(AcciaLertApp());
-}
-
-class AcciaLertApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AcciaLert',
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,7 +44,7 @@ class HomePage extends StatelessWidget {
 
                 // Image
                 Image.asset(
-                  'assests/map_img.png', // Make sure this file exists
+                  'assets/map_img.png', // Make sure this file exists
                   height: 200,
                 ),
 

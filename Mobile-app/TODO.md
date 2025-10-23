@@ -1,0 +1,3 @@
+- [x] Remove MaterialApp wrapper from HomePage.dart
+- [x] Change login success navigation to pushAndRemoveUntil to HomePage
+- [x] Verify other navigations use standard push

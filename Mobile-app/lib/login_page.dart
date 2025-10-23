@@ -41,9 +41,10 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       // ✅ Navigate to HomePage on success
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => AcciaLertApp()),
+        MaterialPageRoute(builder: (_) => HomePage()),
+        (route) => false,
       );
     } catch (e) {
       ScaffoldMessenger.of(

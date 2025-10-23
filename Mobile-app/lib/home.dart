@@ -25,7 +25,7 @@ class Home extends StatelessWidget {
                 // App Logo
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assests/logo.jpeg'),
+                  backgroundImage: AssetImage('assets/logo.jpeg'),
                 ),
                 const SizedBox(height: 40),
 
