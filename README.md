@@ -144,43 +144,6 @@ The AI server will start at http://localhost:5000 and provides endpoints for:
 
 /generate-insights - Generate statistical insights
 
-📁 Folder Structure
-Mobile App
-text
-Mobile-app/
-lib/
-├── models/                 # Data models
-├── services/              # Firebase services
-├── widgets/               # Reusable widgets
-├── pages/                 # App screens
-│   ├── login_page.dart
-│   ├── signup_page.dart
-│   ├── home_page.dart
-│   ├── accident_reporting_page.dart
-│   ├── map_page.dart
-│   └── call_police.dart
-├── utils/                 # Utilities & constants
-└── main.dart             # App entry point
-Website Admin Panel
-text
-Web-site/
-lib/
-├── components/            # Reusable components
-│   ├── Navbar/
-│   ├── Footer/
-│   └── Accident_Analyzer/
-├── pages/                 # Main pages
-│   ├── Landing/
-│   ├── Accident_History/
-│   └── Dashboard/
-├── services/              # API & Firebase services
-├── models/                # Data models
-└── main.dart             # App entry point
-backend_ai/
-├── main.py               # AI server entry point
-├── models/               # ML models
-├── utils/                # Helper functions
-└── requirements.txt      # Python dependencies
 🌐 Deployment
 Firebase Hosting (Website)
 bash
