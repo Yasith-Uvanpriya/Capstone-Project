@@ -3,7 +3,8 @@
 A comprehensive accident reporting system with a mobile app for citizens and a website admin panel for authorities. The system uses Firebase for backend services and includes an AI module for accident analysis and prediction.
 
 📱 Mobile App & 🖥️ Website Preview
-Mobile App - First Page
+Mobile App - First Page - ![Home mobile](https://github.com/user-attachments/assets/f406add1-7303-4972-9c53-efc48905633e)
+
 
 
 Website Admin Panel - First Page![home](https://github.com/user-attachments/assets/938c25b5-a37f-4c1c-a859-0b4fc613969e)
@@ -19,8 +20,6 @@ Capstone-Project/
 ├── 🖥️ Web-site/            # Flutter web admin panel
 │   └── backend_ai/         # Python AI backend
 ├── 📄 README.md
-├── 🔧 firebase.json
-└── 📦 pubspec.yaml
 ✨ Features
 📱 Mobile App
 ✅ User registration & authentication
